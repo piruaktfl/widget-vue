@@ -28,7 +28,7 @@ export default defineComponent({
     ContainerBox
   },
   setup () {
-    const openClose:any = reactive({ state: false })
+    const openClose = reactive({ state: false })
     function openWidget () {
       console.log(openClose.state)
       openClose.state = true
