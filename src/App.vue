@@ -1,5 +1,5 @@
 <template>
-  <div v-if="!openClose.state" class="open-close-widget" @click="openWidget">
+  <div v-if="!openClose.state" class="open-close-widget" @click="openCloseWidget">
     <div>
       <div class="background-image">
       </div>
@@ -9,35 +9,55 @@
       <h3>Ganhe NC$</h3>
     </div>
   </div>
-  <ContainerBox v-if="openClose.state">
+  <ContainerBox v-if="openClose.state" :title="'teste'" @close="openClose.state=$event">
     <keep-alive>
       <transition>
-        Widget Fiote
+        <component :is='components[control]' @newControl="control=$event" />
       </transition>
     </keep-alive>
+    <!-- {{components}}
+      {{control}} -->
   </ContainerBox>
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive } from 'vue'
+import { defineComponent, reactive, ref } from 'vue'
 import ContainerBox from '@/components/ContainerBox.vue'
+import LoginForm from '@/components/LoginForm.vue'
+import RegisterFormInitialStep from '@/components/RegisterFormInitialStep.vue'
 
 export default defineComponent({
   name: 'App',
   components: {
-    ContainerBox
+    ContainerBox,
+    LoginForm,
+    RegisterFormInitialStep
   },
   setup () {
-    const openClose = reactive({ state: false })
-    function openWidget () {
-      console.log(openClose.state)
+    const components = reactive(
+      [
+        'LoginForm',
+        'RegisterFormInitialStep',
+        'PasswordRescueForm',
+        'ProfileInfo',
+        'VerificationCode',
+        'BiographyUser',
+        'WalletUser',
+        'MissionsUser'
+      ]
+    )
+    const control = ref(1)
+    const openClose = reactive({ state: true })
+    function openCloseWidget () {
       openClose.state = true
       console.log(openClose.state)
     }
 
     return {
       openClose,
-      openWidget
+      components,
+      control,
+      openCloseWidget
     }
   }
 })
