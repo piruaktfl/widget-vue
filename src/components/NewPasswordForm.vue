@@ -1,26 +1,20 @@
 <template>
   <div class="form">
     <div class="greetings">
-      <h1>Hey, bem-vindo novamente!</h1>
-      <h2>Para acessar a sua conta entre com seu email e senha.</h2>
+      <h1>Mantenha segredo.</h1>
+      <h2>Crie uma senha segura (pelo menos 6 caracteres) para sua conta, então você poderá acessar usando email e esta senha.</h2>
     </div>
     <form>
-      <div class="label-input">
-        <label for="email">Email</label>
-        <input v-model="form.user" id="email" type="email" placeholder="email@email.com" required>
-        <div class="example-msg">Ex: email@email.com</div>
+      <div class="label-input space-inputs">
+        <label for="email">Senha</label>
+        <input v-model="form.user" id="email" type="password" placeholder="Digite sua senha" required>
       </div>
       <div class="label-input">
-        <label for="senha">Senha</label>
-        <input v-model="form.senha" id="senha" type="password" placeholder="Digite sua senha" required>
+        <label for="email">Confirmação de senha</label>
+        <input v-model="form.user" id="email" type="password" placeholder="Confirme sua nova senha" required>
       </div>
-      <button @click="login">ENTRAR</button>
+      <button @click="login">CONFIRMAR</button>
     </form>
-    <div class="links">
-      <h1 @click="$emit('newControl', 1)">Não possui uma conta?</h1>
-      <h2 @click="$emit('newControl', 2)">Esqueceu sua senha?</h2>
-    </div>
-
   </div>
 </template>
 <script lang="ts">
@@ -30,7 +24,7 @@ export default defineComponent({
   setup () {
     const form = reactive({
       user: '',
-      senha: ''
+      confirmation: ''
     })
     function login () {
       console.log(form)
@@ -103,6 +97,8 @@ export default defineComponent({
     }
   }
   .links {
+    display: flex;
+    justify-content: center;
     h1, h2 {
       user-select: none;
       cursor: pointer;
@@ -121,5 +117,8 @@ export default defineComponent({
       margin-bottom: 15px;
     }
   }
+}
+.space-inputs {
+  margin-bottom: 28px;
 }
 </style>

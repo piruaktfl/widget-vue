@@ -1,8 +1,8 @@
 <template>
   <div class="form">
     <div class="greetings">
-      <h1>Hey, bem-vindo novamente!</h1>
-      <h2>Para acessar a sua conta entre com seu email e senha.</h2>
+      <h1>Ok, vamos te ajudar.</h1>
+      <h2>Para resgatar a sua senha basta preencher o email cadastrado e você receberá um link logo em seguida.</h2>
     </div>
     <form>
       <div class="label-input">
@@ -10,15 +10,11 @@
         <input v-model="form.user" id="email" type="email" placeholder="email@email.com" required>
         <div class="example-msg">Ex: email@email.com</div>
       </div>
-      <div class="label-input">
-        <label for="senha">Senha</label>
-        <input v-model="form.senha" id="senha" type="password" placeholder="Digite sua senha" required>
-      </div>
-      <button @click="login">ENTRAR</button>
+      <button @click="login">PROSSEGUIR</button>
     </form>
     <div class="links">
-      <h1>Não possui uma conta?</h1>
-      <h2>Esqueceu sua senha?</h2>
+      <span>Já possui uma conta? &nbsp;</span>
+      <h1 @click="$emit('newControl', 0)">Entre aqui</h1>
     </div>
 
   </div>
@@ -29,8 +25,7 @@ import { defineComponent, reactive } from 'vue'
 export default defineComponent({
   setup () {
     const form = reactive({
-      user: '',
-      senha: ''
+      user: ''
     })
     function login () {
       console.log(form)
@@ -103,6 +98,8 @@ export default defineComponent({
     }
   }
   .links {
+    display: flex;
+    justify-content: center;
     h1, h2 {
       user-select: none;
       cursor: pointer;

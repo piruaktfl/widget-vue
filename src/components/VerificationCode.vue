@@ -1,24 +1,22 @@
 <template>
   <div class="form">
     <div class="greetings">
-      <h1>Hey, bem-vindo novamente!</h1>
-      <h2>Para acessar a sua conta entre com seu email e senha.</h2>
+      <h1>Estamos quase lá!</h1>
+      <h2>Enviamos um código de validação para o seu email. Verifique sua caixa de entrada, caso não tenha recebido verifique outras caixas, como SPAM.</h2>
     </div>
     <form>
       <div class="label-input">
-        <label for="email">Email</label>
-        <input v-model="form.user" id="email" type="email" placeholder="email@email.com" required>
-        <div class="example-msg">Ex: email@email.com</div>
+        <label for="email">Código de verificação</label>
+        <input v-model="form.user" id="email" type="text" placeholder="- - - - - -" required maxlength="6" minlength="6">
       </div>
-      <div class="label-input">
-        <label for="senha">Senha</label>
-        <input v-model="form.senha" id="senha" type="password" placeholder="Digite sua senha" required>
+      <div class="buttons">
+        <button class="send" @click.prevent="login">CONFIRMAR</button>
+        <button class="resend" @click.prevent="login">REENVIAR CÓDIGO</button>
       </div>
-      <button @click="login">ENTRAR</button>
     </form>
     <div class="links">
-      <h1>Não possui uma conta?</h1>
-      <h2>Esqueceu sua senha?</h2>
+      <h1 @click="$emit('newControl', 1)">Não possui uma conta?</h1>
+      <h2 @click="$emit('newControl', 2)">Esqueceu sua senha?</h2>
     </div>
 
   </div>
@@ -29,8 +27,7 @@ import { defineComponent, reactive } from 'vue'
 export default defineComponent({
   setup () {
     const form = reactive({
-      user: '',
-      senha: ''
+      user: ''
     })
     function login () {
       console.log(form)
@@ -78,6 +75,7 @@ export default defineComponent({
         font-weight: bold;
         outline: none;
         color: #000;
+        text-align: center;
       }
       .example-msg {
         font-size: 12px;
@@ -120,6 +118,17 @@ export default defineComponent({
     h1 {
       margin-bottom: 15px;
     }
+  }
+}
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  .send {
+    padding: 0 30px;
+  }
+  .resend {
+    padding: 0 30px;
+    background-color: #C4C4C4;
   }
 }
 </style>

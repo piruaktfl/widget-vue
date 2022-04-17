@@ -11,7 +11,7 @@
   </div>
   <ContainerBox v-if="openClose.state" :title="'teste'" @close="openClose.state=$event">
     <keep-alive>
-      <transition>
+      <transition name="change">
         <component :is='components[control]' @newControl="control=$event" />
       </transition>
     </keep-alive>
@@ -25,13 +25,27 @@ import { defineComponent, reactive, ref } from 'vue'
 import ContainerBox from '@/components/ContainerBox.vue'
 import LoginForm from '@/components/LoginForm.vue'
 import RegisterFormInitialStep from '@/components/RegisterFormInitialStep.vue'
+import VerificationCode from '@/components/VerificationCode.vue'
+import PasswordRescueForm from '@/components/PasswordRescueForm.vue'
+import NewPasswordForm from '@/components/NewPasswordForm.vue'
+import BiographyUser from '@/components/BiographyUser.vue'
+import MissionsUser from '@/components/MissionsUser.vue'
+import WalletUser from '@/components/WalletUser.vue'
+import ProfileInfo from '@/components/ProfileInfo.vue'
 
 export default defineComponent({
   name: 'App',
   components: {
     ContainerBox,
     LoginForm,
-    RegisterFormInitialStep
+    RegisterFormInitialStep,
+    VerificationCode,
+    PasswordRescueForm,
+    NewPasswordForm,
+    BiographyUser,
+    MissionsUser,
+    WalletUser,
+    ProfileInfo
   },
   setup () {
     const components = reactive(
@@ -43,10 +57,11 @@ export default defineComponent({
         'VerificationCode',
         'BiographyUser',
         'WalletUser',
-        'MissionsUser'
+        'MissionsUser',
+        'NewPasswordForm'
       ]
     )
-    const control = ref(1)
+    const control = ref(0)
     const openClose = reactive({ state: true })
     function openCloseWidget () {
       openClose.state = true
@@ -127,5 +142,19 @@ export default defineComponent({
   h3, h2 {
     color: #000!important;
   }
+}
+
+/* Animações de entrada e saída podem utilizar diferentes  */
+/* funções de duração e de tempo.                          */
+.change-enter-active {
+  transition: all .2s ease;
+}
+.change-leave-active {
+  transition: all .3s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
+.change-enter, .change-leave-to
+/* .slide-fade-leave-active em versões anteriores a 2.1.8 */ {
+  transform: translateX(10px);
+  opacity: 0;
 }
 </style>

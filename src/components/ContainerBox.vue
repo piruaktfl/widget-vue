@@ -11,7 +11,9 @@
       </div>
       <div class="close" @click="$emit('close', false)"></div>
     </div>
-    <slot />
+    <div class="content">
+      <slot />
+    </div>
   </div>
 </template>
 <script lang="ts">
@@ -29,7 +31,7 @@ export default defineComponent({
 </script>
 <style lang="scss" scoped>
 .container-box {
-  padding: 29px 43px;
+  // padding: 29px 43px;
   position: fixed;
   top: 0;
   left: 0;
@@ -79,9 +81,15 @@ export default defineComponent({
   }
 
   .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 603px;
+    padding: 20px 43px;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    background-color: #000;
     .title-img {
       display: flex;
       align-items: center;
@@ -123,5 +131,9 @@ export default defineComponent({
       }
     }
   }
+}
+.content {
+  z-index: 999;
+  padding: 100px 43px 60px 43px;
 }
 </style>
