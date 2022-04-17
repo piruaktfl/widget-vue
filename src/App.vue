@@ -7,9 +7,10 @@
     <div class="texts">
       <h2>Complete Missões</h2>
       <h3>Ganhe NC$</h3>
+      {{teste}}
     </div>
   </div>
-  <ContainerBox v-if="openClose.state" :title="'teste'" @close="openClose.state=$event">
+  <ContainerBox v-if="openClose.state" :title="titles[control]" @close="openClose.state=$event">
     <keep-alive>
       <transition name="change">
         <component :is='components[control]' @newControl="control=$event" />
@@ -35,6 +36,12 @@ import ProfileInfo from '@/components/ProfileInfo.vue'
 
 export default defineComponent({
   name: 'App',
+  props: {
+    teste: {
+      type: String,
+      default: 'Não deu'
+    }
+  },
   components: {
     ContainerBox,
     LoginForm,
@@ -48,6 +55,17 @@ export default defineComponent({
     ProfileInfo
   },
   setup () {
+    const titles = reactive([
+      'Missões',
+      'Missões',
+      'Missões',
+      'Perfil',
+      'Missões',
+      'Missões',
+      'Carteira',
+      'Missões',
+      'Missões'
+    ])
     const components = reactive(
       [
         'LoginForm',
@@ -72,6 +90,7 @@ export default defineComponent({
       openClose,
       components,
       control,
+      titles,
       openCloseWidget
     }
   }

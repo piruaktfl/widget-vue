@@ -1,8 +1,8 @@
 <template>
   <div class="form">
     <div class="greetings">
-      <h1>Hey, bem-vindo novamente!</h1>
-      <h2>Para acessar a sua conta entre com seu email e senha.</h2>
+      <h1>Vamos começar!</h1>
+      <h2>Para dar o primeiro passo, preencha o seu endereço de email mais usado para ser sua identificação.</h2>
     </div>
     <form>
       <div class="label-input">
